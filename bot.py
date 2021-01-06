@@ -43,7 +43,7 @@ async def rank(ctx, *, content: str):
     options.add_argument("headless")
 
 
-    driver = webdriver.Chrome("D:/maplediscord/chromedriver.exe", options=options)
+    driver = webdriver.Chrome("/app/.chromedriver/bin/chromedriver", options=options)
     driver.implicitly_wait(3)
     driver.get('https://maplestory.nexon.com/Ranking/World/Total')
     driver.find_element_by_name('search_text').send_keys(nickname)

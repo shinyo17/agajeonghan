@@ -39,8 +39,14 @@ async def bye(ctx):
 async def rank(ctx, *, content: str):
     nickname = str(content).split(' ')[0]
     
-    driver = webdriver.Chrome("/app/.chromedriver/bin/chromedriver")
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     driver.implicitly_wait(3)
+    
     driver.get('https://maplestory.nexon.com/Ranking/World/Total')
     driver.find_element_by_name('search_text').send_keys(nickname)
     driver.find_element_by_xpath('//*[@id="container"]/div/div/div[2]/div/span[1]/span/a/img').click()

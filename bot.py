@@ -38,12 +38,8 @@ async def bye(ctx):
 @bot.command(name='랭킹', help='캐릭터의 랭킹을 보여 줍니다!')
 async def rank(ctx, *, content: str):
     nickname = str(content).split(' ')[0]
-
-    options = webdriver.ChromeOptions()
-    options.add_argument("headless")
-
-
-    driver = webdriver.Chrome("/app/.chromedriver/bin/chromedriver", options=options)
+    
+    driver = webdriver.Chrome("/app/.chromedriver/bin/chromedriver")
     driver.implicitly_wait(3)
     driver.get('https://maplestory.nexon.com/Ranking/World/Total')
     driver.find_element_by_name('search_text').send_keys(nickname)

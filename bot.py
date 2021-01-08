@@ -9,6 +9,7 @@ bot = commands.Bot(command_prefix='!')
 
 status = ['재획', '사냥', '기보', '무토', '일퀘', '주간퀘', '수로']
 
+
 @tasks.loop(seconds=20)
 async def change_status():
     await bot.change_presence(activity=discord.Game(choice(status)))
@@ -77,6 +78,7 @@ async def rank(ctx, *, content: str):
 길드: {rank_guild}
     ''' 
     await ctx.send(aboutyou)
+
 @bot.command(name='캐럿랜드', help='캐럿랜드의 랭킹을 ARABOJA~')
 async def carat(ctx):
     chrome_options = webdriver.ChromeOptions()
@@ -94,7 +96,7 @@ async def carat(ctx):
     driver.find_element_by_xpath('/html/body/div[4]/div[4]/div/div/div[3]/div[1]/table/tbody/tr/td[2]/span/a/text()').click()
 
     caratland = driver.find_element_by_class_name('char_info')
-    guildrank = driver.find_elements_by_tag_name('dl')
+    guildrank = caratland.find_elements_by_tag_name('dl')
     croarank = dl[1]
     croaguildrank = croarank.find_element_by_class_name('num')
     croaguildrank_caratland = croaguildrank.text
@@ -122,5 +124,4 @@ async def carat(ctx):
     await ctx.send(aboutguild)
 
 bot.run(os.environ['BOT_TOKEN'])
-
 

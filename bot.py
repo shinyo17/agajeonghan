@@ -79,45 +79,5 @@ async def rank(ctx, *, content: str):
     ''' 
     await ctx.send(aboutyou)
 
-@bot.command(name='캐럿랜드', help='캐럿랜드의 랭킹을 ARABOJA~')
-async def carat(ctx):
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument("--no-sandbox")
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-    driver.implicitly_wait(3)
-    
-    driver.get('https://maplestory.nexon.com/Common/Guild?gid=242491&wid=5')
-    
-    caratland = driver.find_element_by_class_name('char_info')
-    guildrank = caratland.find_elements_by_tag_name('dl')
-    croarank = guildrank[1]
-    croaguildrank = croarank.find_element_by_class_name('num')
-    croaguildrank_caratland = croaguildrank.text
-
-    caratland_tmi = driver.find_element_by_class_name('char_info_tb')
-    caratland_tmi_tmi = caratland_tmi.find_element_by_class_name('info_tb_wrap')
-    caratland_tmi_tmi_tmi = caratland_tmi_tmi.find_elements_by_tag_name('li')
-    cl_guildmaster = caratland_tmi_tmi_tmi[1]
-    guildmaster = cl_guildmaster.text
-
-    cl_msc = caratland_tmi_tmi_tmi[2]
-    msc = cl_msc.text
-
-    cl_pp = caratland_tmi_tmi_tmi[3]
-    pp = cl_pp.text
-
-    driver.quit()
-
-    aboutguild =f'''
-    월드 내 주간 명성치 랭킹: {croaguildrank_caratland}
-길드 마스터: {guildmaster}
-주간 명성치: {msc}
-길드원 수: {pp}
-    ''' 
-    await ctx.send(aboutguild)
-
 bot.run(os.environ['BOT_TOKEN'])
 

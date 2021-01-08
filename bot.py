@@ -93,7 +93,7 @@ async def carat(ctx):
     driver.find_element_by_name('search_text').send_keys('캐럿랜드')
     driver.find_element_by_xpath('/html/body/div[4]/div[4]/div/div/div[2]/div/span[1]/span/a/img').click()
 
-    driver.find_element_by_xpath('/html/body/div[4]/div[4]/div/div/div[3]/div[1]/table/tbody/tr/td[2]/span/a/text()').click()
+    driver.find_element_by_xpath('/html/body/div[4]/div[4]/div/div/div[3]/div[1]/table/tbody/tr/td[2]/span/a').click()
 
     caratland = driver.find_element_by_class_name('char_info')
     guildrank = caratland.find_elements_by_tag_name('dl')
@@ -124,4 +124,3 @@ async def carat(ctx):
     await ctx.send(aboutguild)
 
 bot.run(os.environ['BOT_TOKEN'])
-

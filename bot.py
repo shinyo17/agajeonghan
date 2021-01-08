@@ -93,7 +93,7 @@ async def carat(ctx):
     
     caratland = driver.find_element_by_class_name('char_info')
     guildrank = caratland.find_elements_by_tag_name('dl')
-    croarank = dl[1]
+    croarank = guildrank[1]
     croaguildrank = croarank.find_element_by_class_name('num')
     croaguildrank_caratland = croaguildrank.text
 

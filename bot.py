@@ -89,12 +89,8 @@ async def carat(ctx):
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     driver.implicitly_wait(3)
     
-    driver.get('https://maplestory.nexon.com/Ranking/World/Guild?w=10&t=1#a')
-    driver.find_element_by_name('search_text').send_keys('캐럿랜드')
-    driver.find_element_by_xpath('/html/body/div[4]/div[4]/div/div/div[2]/div/span[1]/span/a/img').click()
-
-    driver.find_element_by_xpath('/html/body/div[4]/div[4]/div/div/div[3]/div[1]/table/tbody/tr/td[2]/span/a').click()
-
+    driver.get('https://maplestory.nexon.com/Common/Guild?gid=242491&wid=5')
+    
     caratland = driver.find_element_by_class_name('char_info')
     guildrank = caratland.find_elements_by_tag_name('dl')
     croarank = dl[1]
@@ -124,3 +120,4 @@ async def carat(ctx):
     await ctx.send(aboutguild)
 
 bot.run(os.environ['BOT_TOKEN'])
+

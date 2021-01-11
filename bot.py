@@ -7,7 +7,7 @@ from random import choice
 
 bot = commands.Bot(command_prefix='!')
 
-status = ['재획', '사냥', '기보', '무토', '일퀘', '주간퀘', '수로']
+status = ['재획', '사냥', '기보', '무토', '일퀘', '주간퀘', '수로', '레벨업']
 
 
 @tasks.loop(seconds=20)

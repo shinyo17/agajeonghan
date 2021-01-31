@@ -79,5 +79,39 @@ async def rank(ctx, *, content: str):
     ''' 
     await ctx.send(aboutyou)
 
+@bot.command(name='캐랜', help='캐랜의 정보를 보여 줍니다!')
+async def calan(ctx, *, content: str):
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+    driver.implicitly_wait(3)
+    
+    driver.get('https://maple.gg/guild/croa/%EC%BA%90%EB%9F%BF%EB%9E%9C%EB%93%9C')
+    calan_info = driver.find_elements_by_class_name('col-lg-25 col-md-4 col-sm-6 col-6 mt-2')
+    guilma = calan_info[0].find_element_by_tag_name('span')
+    guilma = guilma.find_element_by_class_name('text-grape-fruit text-underline')
+    guild_world_rank  = calan_info[1].find_element_by_tag_name('span')
+    guild_rank = calan_info[2].find_element_by_tag_name('span')
+    guild_people = calan_info[3].find_element_by_tag_name('span')
+    guild_point = calan_info[4].find_element_by_tag_name('span')
+
+    driver.quit()
+
+    aboutguil =f'''
+    길마: {guildma}
+길드 월드 랭킹: {guild_world_rank}
+길드 랭킹: {guild_rank}
+길드원: {guild_people}
+길드 포인트: {guild_point}
+    ''' 
+    await ctx.send(aboutguil)
+
+
+
+
+
 bot.run(os.environ['BOT_TOKEN'])
 
